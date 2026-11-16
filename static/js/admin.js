@@ -197,16 +197,21 @@ document.addEventListener('DOMContentLoaded', () => {
         document.body.appendChild(backdrop);
     }
 
+    const syncSidebarState = () => {
+        const isOpen = sidebar.classList.contains('open');
+        backdrop.classList.toggle('active', isOpen && window.innerWidth <= 900);
+        toggle.setAttribute('aria-expanded', String(isOpen));
+        toggle.innerHTML = isOpen ? '&times;' : '&#9776;';
+    };
     const closeSidebar = () => {
         sidebar.classList.remove('open');
-        backdrop.classList.remove('active');
-        toggle.setAttribute('aria-expanded', 'false');
+        syncSidebarState();
     };
     const openSidebar = () => {
         sidebar.classList.add('open');
-        backdrop.classList.add('active');
-        toggle.setAttribute('aria-expanded', 'true');
+        syncSidebarState();
     };
+    syncSidebarState();
 
     toggle.setAttribute('aria-controls', 'adminSidebar');
     toggle.setAttribute('aria-expanded', 'false');
