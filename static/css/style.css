@@ -1637,3 +1637,61 @@ input, select, textarea { max-width: 100%; }
   }
   .page-content input, .page-content button { min-height: 44px; }
 }
+
+
+/* PUBLIC PORTAL FIX: prevent mobile viewport shifting / horizontal overflow.
+   This stylesheet is loaded by public pages; admin uses its separate base. */
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+    -webkit-text-size-adjust: 100%;
+}
+body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+@media (max-width: 868px) {
+    .container,
+    .nav-wrapper,
+    .nav-inner,
+    .hero-grid,
+    .hero-content,
+    .section-wrapper,
+    .page-content,
+    .section-header,
+    .stats-grid,
+    .teams-grid,
+    .players-grid,
+    .venues-grid,
+    .footer-grid {
+        min-width: 0;
+        max-width: 100%;
+    }
+    .hero-grid > *,
+    .section-header > *,
+    .footer-grid > *,
+    .stats-grid > *,
+    .teams-grid > *,
+    .players-grid > *,
+    .venues-grid > * {
+        min-width: 0;
+    }
+    .hero-stadium,
+    main,
+    .page-content,
+    .section-wrapper {
+        max-width: 100%;
+        overflow-x: clip;
+    }
+    .hero-ball-container,
+    .ball-sphere,
+    .pitch-pedestal,
+    .floating-stat-card {
+        max-width: 100%;
+    }
+}
