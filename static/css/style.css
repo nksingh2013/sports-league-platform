@@ -1620,3 +1620,20 @@ input, select, textarea { max-width: 100%; }
   .footer-grid { grid-template-columns: 1fr; }
   .footer-col:first-child { grid-column: auto; }
 }
+
+
+/* Prevent mobile browser auto-zoom when focusing login and form fields */
+@media (max-width: 768px) {
+  input, select, textarea, .form-control, .filter-select,
+  .search-input-wrap input {
+    font-size: 16px !important;
+  }
+  .page-content .glass-card {
+    width: 100%;
+    max-width: 440px;
+    padding: clamp(1.1rem, 5vw, 2rem) !important;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .page-content input, .page-content button { min-height: 44px; }
+}
