@@ -183,49 +183,51 @@ function initDeleteConfirmations() {
     });
 }
 
-/* Mobile sidebar backdrop and accessible close behaviour */
-document.addEventListener('DOMContentLoaded', () => {
+/**
+ * Accessible mobile admin sidebar.
+ * One delegated setup only; keep the menu closed after every page load.
+ */
+function initAdminSidebar() {
     const sidebar = document.querySelector('.admin-sidebar');
     const toggle = document.getElementById('adminSidebarToggle');
     if (!sidebar || !toggle) return;
 
     let backdrop = document.querySelector('.admin-sidebar-backdrop');
     if (!backdrop) {
-        backdrop = document.createElement('div');
+        backdrop = document.createElement('button');
+        backdrop.type = 'button';
         backdrop.className = 'admin-sidebar-backdrop';
+        backdrop.setAttribute('aria-label', 'Close navigation menu');
         backdrop.setAttribute('aria-hidden', 'true');
         document.body.appendChild(backdrop);
     }
 
-    const syncSidebarState = () => {
-        const isOpen = sidebar.classList.contains('open');
-        backdrop.classList.toggle('active', isOpen && window.innerWidth <= 900);
-        toggle.setAttribute('aria-expanded', String(isOpen));
-        toggle.innerHTML = isOpen ? '&times;' : '&#9776;';
-    };
-    const closeSidebar = () => {
-        sidebar.classList.remove('open');
-        syncSidebarState();
-    };
-    const openSidebar = () => {
-        sidebar.classList.add('open');
-        syncSidebarState();
-    };
-    syncSidebarState();
-
-    toggle.setAttribute('aria-controls', 'adminSidebar');
-    toggle.setAttribute('aria-expanded', 'false');
     sidebar.id = sidebar.id || 'adminSidebar';
+    toggle.setAttribute('aria-controls', sidebar.id);
 
+    const sync = () => {
+        const open = sidebar.classList.contains('open') && window.innerWidth <= 900;
+        sidebar.classList.toggle('open', open);
+        backdrop.classList.toggle('active', open);
+        backdrop.setAttribute('aria-hidden', String(!open));
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.innerHTML = open ? '&times;' : '&#9776;';
+        document.body.classList.toggle('admin-menu-open', open);
+    };
+    const close = () => {
+        sidebar.classList.remove('open');
+        sync();
+    };
+
+    close();
     toggle.addEventListener('click', () => {
-        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+        sidebar.classList.toggle('open');
+        sync();
     });
-    backdrop.addEventListener('click', closeSidebar);
-    sidebar.querySelectorAll('a').forEach(link => link.addEventListener('click', closeSidebar));
+    backdrop.addEventListener('click', close);
+    sidebar.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
     document.addEventListener('keydown', event => {
-        if (event.key === 'Escape') closeSidebar();
+        if (event.key === 'Escape') close();
     });
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 900) closeSidebar();
-    });
-});
+    window.addEventListener('resize', sync);
+}
