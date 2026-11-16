@@ -188,3 +188,45 @@ function initDeleteConfirmations() {
         });
     });
 }
+
+/* Mobile sidebar backdrop and accessible close behaviour */
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.querySelector('.admin-sidebar');
+    const toggle = document.getElementById('adminSidebarToggle');
+    if (!sidebar || !toggle) return;
+
+    let backdrop = document.querySelector('.admin-sidebar-backdrop');
+    if (!backdrop) {
+        backdrop = document.createElement('div');
+        backdrop.className = 'admin-sidebar-backdrop';
+        backdrop.setAttribute('aria-hidden', 'true');
+        document.body.appendChild(backdrop);
+    }
+
+    const closeSidebar = () => {
+        sidebar.classList.remove('open');
+        backdrop.classList.remove('active');
+        toggle.setAttribute('aria-expanded', 'false');
+    };
+    const openSidebar = () => {
+        sidebar.classList.add('open');
+        backdrop.classList.add('active');
+        toggle.setAttribute('aria-expanded', 'true');
+    };
+
+    toggle.setAttribute('aria-controls', 'adminSidebar');
+    toggle.setAttribute('aria-expanded', 'false');
+    sidebar.id = sidebar.id || 'adminSidebar';
+
+    toggle.addEventListener('click', () => {
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+    backdrop.addEventListener('click', closeSidebar);
+    sidebar.querySelectorAll('a').forEach(link => link.addEventListener('click', closeSidebar));
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeSidebar();
+    });
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 900) closeSidebar();
+    });
+});
