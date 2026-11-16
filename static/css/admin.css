@@ -502,3 +502,21 @@
 @media (max-width: 360px) {
   .admin-stats-grid { grid-template-columns: minmax(0, 1fr); }
 }
+
+
+/* Final mobile layout guardrails */
+html, body.admin-body { max-width: 100%; overflow-x: hidden; }
+.admin-layout { width: 100%; max-width: 100%; overflow-x: clip; }
+.admin-main { width: auto; min-width: 0; flex: 1 1 auto; }
+.admin-content > * { min-width: 0; max-width: 100%; }
+.admin-sidebar-backdrop {
+  appearance: none; border: 0; padding: 0; cursor: pointer;
+}
+body.admin-menu-open { overflow: hidden; }
+@media (max-width: 900px) {
+  .admin-main { width: 100%; }
+}
+@media (max-width: 640px) {
+  .admin-topbar { width: 100%; }
+  .admin-content { width: 100%; }
+}
