@@ -485,3 +485,20 @@
   .admin-content { padding: .7rem; }
   .admin-topbar { padding: .5rem .65rem; }
 }
+
+
+/* Mobile dashboard refinements based on real-device screenshots */
+@media (max-width: 640px) {
+  .admin-stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .65rem; }
+  .admin-stat-card { min-height: 112px; padding: .75rem; gap: .6rem; }
+  .admin-stat-icon { width: 36px; height: 36px; flex-basis: 36px; }
+  .admin-stat-val { font-size: 1.35rem; }
+  .admin-stat-title { font-size: .62rem; letter-spacing: .25px; }
+  .dashboard-duo-grid { grid-template-columns: minmax(0, 1fr) !important; gap: 1.25rem !important; }
+  .admin-content > .glass-card { padding: 1rem !important; }
+  .admin-content > .glass-card > div { gap: .65rem !important; }
+  .admin-content > .glass-card a { width: 100%; justify-content: center; text-align: center; }
+}
+@media (max-width: 360px) {
+  .admin-stats-grid { grid-template-columns: minmax(0, 1fr); }
+}
