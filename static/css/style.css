@@ -1555,3 +1555,68 @@ body {
         animation: none !important;
     }
 }
+
+
+/* ==========================================================================
+   MOBILE HARDENING - public website (additive overrides)
+   ========================================================================== */
+html, body { max-width: 100%; }
+body { -webkit-text-size-adjust: 100%; }
+img, video, iframe { max-width: 100%; }
+.container, .page-content, .section-wrapper, .glass-card { min-width: 0; }
+.container { width: 100%; }
+.table-container { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.data-table { min-width: 620px; }
+button, a, input, select, textarea { touch-action: manipulation; }
+input, select, textarea { max-width: 100%; }
+@media (max-width: 868px) {
+  .nav-wrapper { min-height: 68px; height: auto; gap: .5rem; }
+  .brand-link { min-width: 0; gap: 8px; }
+  .brand-crest { flex: 0 0 40px; width: 40px; height: 40px; }
+  .brand-text { min-width: 0; }
+  .brand-text h1 { font-size: clamp(.88rem, 3.6vw, 1.15rem); overflow-wrap: anywhere; }
+  .brand-text span { font-size: .58rem; letter-spacing: 1px; }
+  .nav-actions { gap: .4rem; flex-shrink: 0; }
+  .btn-admin-pill { padding: .45rem .65rem; font-size: .72rem; }
+  .mobile-menu-btn { min-width: 42px; min-height: 42px; }
+  .mobile-nav-panel { max-height: calc(100dvh - 70px); overflow-y: auto; }
+  .hero-stadium { padding: 3rem 0 2.5rem; }
+  .hero-grid { gap: 1.5rem; }
+  .hero-title { font-size: clamp(2rem, 9vw, 3.4rem); overflow-wrap: anywhere; }
+  .hero-ball-container { max-width: 320px; height: min(78vw, 320px); }
+  .ball-sphere { width: min(55vw, 190px); height: min(55vw, 190px); }
+  .pitch-pedestal { width: min(70vw, 250px); }
+  .floating-stat-card { right: 0; bottom: 10px; padding: .55rem .75rem; }
+  .section-header { align-items: flex-start; gap: .75rem; flex-wrap: wrap; }
+  .section-header-left h2 { font-size: clamp(1.25rem, 5vw, 1.7rem); }
+  .teams-grid, .players-grid, .venues-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); }
+}
+@media (max-width: 640px) {
+  .container { padding-left:  .85rem; padding-right: .85rem; }
+  .page-content > .container { padding-top: 1rem !important; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-actions > a, .hero-actions > button { justify-content: center; width: 100%; }
+  .hero-lead { font-size: 1rem; }
+  .match-card { padding: 1rem; }
+  .match-teams-row { grid-template-columns: minmax(0, 1fr); }
+  .match-team { min-width: 0; }
+  .match-team-name { overflow-wrap: anywhere; }
+  .match-footer { align-items: flex-start; flex-direction: column; gap: .5rem; }
+  .match-venue { white-space: normal; }
+  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem; }
+  .stat-item { padding: .25rem; border-bottom: 0; }
+  .stat-number { font-size: 1.8rem; }
+  .stat-label { font-size: .68rem; letter-spacing: .8px; }
+  .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem; }
+  .footer-col:first-child { grid-column: 1 / -1; }
+  .footer-bottom { overflow-wrap: anywhere; }
+  .mobile-stacked-table td { gap: .5rem; overflow-wrap: anywhere; }
+  .search-input-wrap { min-width: 100%; }
+}
+@media (max-width: 380px) {
+  .container { padding-left: .7rem; padding-right: .7rem; }
+  .brand-crest { display: none; }
+  .btn-admin-pill { font-size: .68rem; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .footer-col:first-child { grid-column: auto; }
+}
