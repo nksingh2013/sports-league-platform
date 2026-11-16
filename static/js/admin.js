@@ -13,14 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
  * Mobile Admin Sidebar Toggle
  */
 function initAdminSidebar() {
-    const toggleBtn = document.getElementById('adminSidebarToggle');
-    const sidebar = document.querySelector('.admin-sidebar');
-    
-    if (toggleBtn && sidebar) {
-        toggleBtn.addEventListener('click', () => {
-            sidebar.classList.toggle('open');
-        });
-    }
+    // Mobile sidebar behaviour is registered once by the accessible handler
+    // at the end of this file (with backdrop, Escape and resize support).
 }
 
 /**
